@@ -1,0 +1,38 @@
+version: '3'
+
+#https://github.com/Islandora-Devops/isle-dc/blob/development/docker-compose.traefik.yml
+
+services:
+  reverse-proxy:
+    # The official v2 Traefik docker image
+    image: traefik:v2.5
+    # Enables the web UI and tells Traefik to listen to docker
+    command:
+      - --log.level=INFO
+      - --api.insecure=true
+      - --entryPoints.web.address=:80
+      - --entryPoints.node.address=:3000
+      - --entryPoints.mysql.address=:3306
+      - --entryPoints.solr.address=:8983
+      - --providers.docker
+      - --providers.docker.network=web
+    networks:
+      web: { }
+    ports:
+      # The HTTP port
+      - "80:80"
+      # The HTTP port
+      - "3000:3000"
+      # The MySQL port
+      - "3306:3306"
+      # "The SOLR port"
+      - "8983:8983"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+
+networks:
+  web:
+    external: true
