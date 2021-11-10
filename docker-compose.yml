@@ -1,6 +1,7 @@
 version: '3'
 
 #https://github.com/Islandora-Devops/isle-dc/blob/development/docker-compose.traefik.yml
+# Docker network create web
 
 services:
   reverse-proxy:
