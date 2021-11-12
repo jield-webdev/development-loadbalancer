@@ -33,6 +33,18 @@ services:
     volumes:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
+  phpmyadmin:
+    image: 'phpmyadmin:latest'
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.phpmyadmin.loadbalancer.server.port=80
+      - traefik.http.routers.phpmyadmin.service=phpmyadmin
+      - traefik.http.routers.phpmyadmin.rule=Host(`phpmyadmin.docker.localhost`)
+      - traefik.http.routers.phpmyadmin.entrypoints=web
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - web
 
 networks:
   web:
