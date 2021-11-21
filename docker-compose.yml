@@ -44,6 +44,17 @@ services:
     networks:
       - web
 
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    logging:
+      driver: 'none'  # disable saving logs
+    ports:
+      - "1025:1025" # smtp server
+      - "8025:8025" # web ui
+    networks:
+      - web
+
 networks:
   web:
     external: true
