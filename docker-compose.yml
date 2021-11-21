@@ -8,17 +8,6 @@ services:
     # The official v2 Traefik docker image
     image: traefik:v2.5
     container_name: reverse-proxy
-    # Enables the web UI and tells Traefik to listen to docker
-    command:
-      - --log.level=INFO
-      - --api.insecure=true
-      - --entryPoints.web.address=:80
-      - --entryPoints.https.address=:443
-      - --entryPoints.node.address=:3000
-      - --entryPoints.mysql.address=:3306
-      - --entryPoints.solr.address=:8983
-      - --providers.docker
-      - --providers.docker.network=web
     networks:
       web: { }
     ports:
@@ -30,6 +19,11 @@ services:
     volumes:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik/traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./traefik/config.yml:/etc/traefik/config.yml:ro
+      # Map the certs
+      - ./certs:/etc/certs:ro
+
   phpmyadmin:
     image: 'phpmyadmin:latest'
     container_name: phpmyadmin
@@ -38,7 +32,8 @@ services:
       - traefik.http.services.phpmyadmin.loadbalancer.server.port=80
       - traefik.http.routers.phpmyadmin.service=phpmyadmin
       - traefik.http.routers.phpmyadmin.rule=Host(`phpmyadmin.docker.localhost`)
-      - traefik.http.routers.phpmyadmin.entrypoints=web
+      - traefik.http.routers.phpmyadmin.entrypoints=https
+      - traefik.http.routers.phpmyadmin.tls=true
     environment:
       - PMA_HOST=host.docker.internal
     networks:
