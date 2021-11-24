@@ -7,10 +7,19 @@ service
  * PHPMyadmin
  * Mailhog
 
-Create a network first
+Create a network first, but it is better to create a network per project
 
 ```shell
 docker network create web
+
+docker network create itea 
+docker network create pa-portal 
+docker network create itea 
+docker network create itea 
+docker network create itea 
+
+
+
 ```
 
 Create a certificate via

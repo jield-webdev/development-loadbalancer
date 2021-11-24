@@ -10,6 +10,14 @@ services:
     container_name: reverse-proxy
     networks:
       web: { }
+      itea: { }
+      pa-portal: { }
+      solodb-imec: { }
+      solodb-xenics: { }
+      navela: { }
+      permit-manager: { }
+      moonraker: { }
+      equipage: { }
     ports:
       - "80:80"
       - "443:443"
@@ -52,4 +60,20 @@ services:
 
 networks:
   web:
+    external: true
+  itea:
+    external: true
+  pa-portal:
+    external: true
+  solodb-xenics:
+    external: true
+  solodb-imec:
+    external: true
+  navela:
+    external: true
+  permit-manager:
+    external: true
+  moonraker:
+    external: true
+  equipage:
     external: true
