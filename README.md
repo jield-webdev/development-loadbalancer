@@ -20,6 +20,7 @@ docker network create solodb-imec
 docker network create solodb-equipage
 docker network create equipage
 docker network create navela
+docker network create moonraker
 
 ```
 
