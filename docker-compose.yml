@@ -15,12 +15,12 @@ services:
       aeneas: { }
       pa-portal: { }
       solodb-imec: { }
-      solodb-xenics: { }
       solodb-equipage: { }
+      solodb-xenics: { }
+      solodb-qutech: { }
       navela: { }
       permit-manager: { }
       moonraker: { }
-      equipage: { }
     ports:
       - "80:80"
       - "443:443"
@@ -78,11 +78,11 @@ networks:
     external: true
   solodb-equipage:
     external: true
+  solodb-qutech:
+    external: true
   navela:
     external: true
   permit-manager:
     external: true
   moonraker:
-    external: true
-  equipage:
     external: true
