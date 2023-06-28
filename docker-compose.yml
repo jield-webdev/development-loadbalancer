@@ -5,8 +5,7 @@ version: '3'
 
 services:
   reverse-proxy:
-    # The official v2 Traefik docker image
-    image: traefik:v2.5
+    image: traefik:v3.0.0-beta3
     container_name: reverse-proxy
     networks:
       web: { }
@@ -14,18 +13,19 @@ services:
       ecp: { }
       aeneas: { }
       pa-portal: { }
-      solodb-imec: { }
-      solodb-equipage: { }
+      solodb-onelab: { }
       solodb-xenics: { }
       solodb-qutech: { }
-      navela: { }
+      solodb-black-semiconductor: { }
+      callisto: { }
       permit-manager: { }
       moonraker: { }
+      cebebelgica: { }
+      7mntn: { }
+      drukdoor: { }
     ports:
       - "80:80"
       - "443:443"
-      - "3000:3000"
-      - "8983:8983"
       - "8080:8080"
     volumes:
       # So that Traefik can listen to the Docker events
@@ -36,7 +36,7 @@ services:
       - ./certs:/etc/certs:ro
 
   phpmyadmin:
-    image: 'phpmyadmin:latest'
+    image: phpmyadmin:latest
     container_name: phpmyadmin
     labels:
       - traefik.enable=true
@@ -74,15 +74,21 @@ networks:
     external: true
   solodb-xenics:
     external: true
-  solodb-imec:
-    external: true
-  solodb-equipage:
+  solodb-onelab:
     external: true
   solodb-qutech:
     external: true
-  navela:
+  solodb-black-semiconductor:
+    external: true
+  callisto:
     external: true
   permit-manager:
     external: true
   moonraker:
+    external: true
+  cebebelgica:
+    external: true
+  7mntn:
+    external: true
+  drukdoor:
     external: true

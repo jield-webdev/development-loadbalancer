@@ -16,10 +16,14 @@ docker network create aeneas
 docker network create pa-portal 
 docker network create permit-manager
 docker network create solodb-xenics
-docker network create solodb-imec
+docker network create solodb-onelab
 docker network create solodb-qutech
-docker network create navela
+docker network create solodb-black-semiconductor
+docker network create callisto
+docker network create cebebelgica
 docker network create moonraker
+docker network create 7mntn
+docker network create drukdoor
 
 ```
 
