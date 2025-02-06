@@ -16,7 +16,6 @@ docker network create aeneas
 docker network create pa-portal 
 docker network create permit-manager
 docker network create solodb-xenics
-docker network create solodb-onelab
 docker network create solodb-rayleigh
 docker network create solodb-tno
 docker network create solodb-onelab
