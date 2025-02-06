@@ -1,7 +1,6 @@
 services:
   reverse-proxy:
     image: traefik:latest
-    container_name: reverse-proxy
     networks:
       web: { }
       itea: { }
@@ -33,7 +32,6 @@ services:
 
   phpmyadmin:
     image: phpmyadmin:latest
-    container_name: phpmyadmin
     labels:
       - traefik.enable=true
       - traefik.http.services.phpmyadmin.loadbalancer.server.port=80
@@ -42,7 +40,7 @@ services:
       - traefik.http.routers.phpmyadmin.entrypoints=https
       - traefik.http.routers.phpmyadmin.tls=true
     environment:
-      - PMA_HOST=host.docker.internal
+      - PMA_HOST=mysql
     networks:
       - web
 
@@ -56,6 +54,22 @@ services:
       - "8025:8025" # web ui
     networks:
       - web
+
+  mysql:    
+    image: mysql:latest
+    networks:
+      - web
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root_password' #Change this if needed
+      MYSQL_USER: 'user'
+      MYSQL_PASS: 'password'
+    volumes:
+      - docker-mysql-volume:/var/lib/mysql
+    ports:
+      - "3306:3306"  
+
+volumes:
+  docker-mysql-volume:
 
 networks:
   web:
