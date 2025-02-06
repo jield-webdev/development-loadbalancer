@@ -1,11 +1,6 @@
-version: '3'
-
-#https://github.com/Islandora-Devops/isle-dc/blob/development/docker-compose.traefik.yml
-# Docker network create web
-
 services:
   reverse-proxy:
-    image: traefik:v3.0.0-beta3
+    image: traefik:latest
     container_name: reverse-proxy
     networks:
       web: { }
@@ -14,12 +9,13 @@ services:
       aeneas: { }
       pa-portal: { }
       solodb-onelab: { }
+      solodb-tno: { }
       solodb-xenics: { }
       solodb-qutech: { }
       solodb-black-semiconductor: { }
+      solodb-rayleigh: { }
       callisto: { }
       permit-manager: { }
-      moonraker: { }
       cebebelgica: { }
       7mntn: { }
       drukdoor: { }
@@ -78,13 +74,15 @@ networks:
     external: true
   solodb-qutech:
     external: true
+  solodb-rayleigh:
+    external: true
   solodb-black-semiconductor:
+    external: true
+  solodb-tno:
     external: true
   callisto:
     external: true
   permit-manager:
-    external: true
-  moonraker:
     external: true
   cebebelgica:
     external: true
