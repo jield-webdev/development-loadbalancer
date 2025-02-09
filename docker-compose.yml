@@ -2,22 +2,22 @@ services:
   reverse-proxy:
     image: traefik:latest
     networks:
-      web: { }
-      itea: { }
-      ecp: { }
-      aeneas: { }
-      pa-portal: { }
-      solodb-onelab: { }
-      solodb-tno: { }
-      solodb-xenics: { }
-      solodb-qutech: { }
-      solodb-black-semiconductor: { }
-      solodb-rayleigh: { }
-      callisto: { }
-      permit-manager: { }
-      cebebelgica: { }
-      7mntn: { }
-      drukdoor: { }
+      web: {}
+      itea: {}
+      ecp: {}
+      aeneas: {}
+      pa-portal: {}
+      solodb-onelab: {}
+      solodb-tno: {}
+      solodb-xenics: {}
+      solodb-qutech: {}
+      solodb-black-semiconductor: {}
+      solodb-rayleigh: {}
+      callisto: {}
+      permit-manager: {}
+      cebebelgica: {}
+      7mntn: {}
+      drukdoor: {}
     ports:
       - "80:80"
       - "443:443"
@@ -48,28 +48,29 @@ services:
     image: mailhog/mailhog
     container_name: mailhog
     logging:
-      driver: 'none'  # disable saving logs
+      driver: "none" # disable saving logs
     ports:
       - "1025:1025" # smtp server
       - "8025:8025" # web ui
     networks:
       - web
 
-  mysql:    
-    image: mysql:latest
+  mysql:
+    image: ghcr.io/jield-webdev/docker-repos/mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
     networks:
       - web
-    environment:
-      MYSQL_ROOT_PASSWORD: 'root_password' #Change this if needed
-      MYSQL_USER: 'user'
-      MYSQL_PASS: 'password'
-    volumes:
-      - docker-mysql-volume:/var/lib/mysql
-    ports:
-      - "3306:3306"  
 
 volumes:
   docker-mysql-volume:
+  mysql-data:
 
 networks:
   web:
